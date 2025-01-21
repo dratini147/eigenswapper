@@ -20,10 +20,12 @@ import qutip as qt
 #     return r_ev, r_es
 
 
-# r_ev is the array of eigenvalues (floats)
-# r_es is the array of eigenvectors in QuTiP quantum object format
+# r_ev is the array of eigenvalues (floats).
+#   The diagonaliser above always sorts in ascending order, resulting in "swaps" w.r.t. time.
+# r_es is the array of eigenvectors in QuTiP quantum object format.
 # The orthogonality of eigenvectors at adjacent timesteps should be close to 0.
 #   When the orthogonality is high, check the next entry in the eigenvector array for a "swap".
+# Returns the corrected arrays of eigenvalues and eigenvectors.
 def eigensort(r_ev, r_es, tsteps, dim):  # tracks and removes crossings in eigenvalues of the eigensolver
     for i in range(tsteps - 1):
         for j in range(dim):
